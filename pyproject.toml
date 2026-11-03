@@ -1,0 +1,11 @@
+[project]
+name = "comfyui-grokified-api"
+version = "1.0.0"
+description = "Grokified (OpenAI-compatible) cloud LLM text/vision node for ComfyUI, drop-in for the local LLM Text Processor."
+requires-python = ">=3.9"
+dependencies = ["requests>=2.28"]
+
+[tool.comfy]
+PublisherId = "local"
+DisplayName = "ComfyUI Grokified API"
+Icon = ""
