@@ -6,6 +6,8 @@ untuk node `LLM Text Processor` dari `ComfyUI-LLM-text-processor`:
 output `RESPONSE` / `REASONING` / `PERF` ada di slot yang sama (0/1/2), input
 `image` dan `prompt` juga sama, jadi workflow yang sudah ada cuma perlu ganti tipe node.
 
+Repo: <https://github.com/CraftBlack/ComfyUI-Grokified-API>
+
 ## Kenapa node ini ada
 
 Node `ComfyUI-OpenAI-API` (`OpenAIChatCompletion`) sebenarnya **bisa** bicara dengan
@@ -30,21 +32,52 @@ ditolak server otomatis di-drop lalu diulang (lihat `_downgrade()` di `grokified
 
 ```
 ComfyUI-Grokified-API/
-├─ __init__.py            # registrasi node
-├─ grokified_client.py    # HTTP client (requests saja, tanpa paket openai)
-├─ nodes.py               # node + preset system prompt + encoding gambar
-└─ tests/self_test.py     # self-test end-to-end ke API asli
+├─ __init__.py                    # registrasi node
+├─ grokified_client.py            # HTTP client (requests saja, tanpa paket openai)
+├─ nodes.py                       # node + preset system prompt + encoding gambar
+├─ pyproject.toml                 # metadata + PublisherId Comfy Registry
+├─ requirements.txt               # requests>=2.28
+└─ tests/
+   ├─ probe_api_compat.py         # probe kompatibilitas endpoint Grokified
+   ├─ probe_stream_reasoning.py   # probe streaming + reasoning_content
+   └─ self_test.py                # self-test end-to-end ke API asli
 ```
 
 ## Instalasi
 
+**A. Dari GitHub (git clone)**
+
 ```powershell
-# dari folder ini
+cd C:\ComfyUI\custom_nodes
+git clone https://github.com/CraftBlack/ComfyUI-Grokified-API.git
+# lalu restart ComfyUI
+```
+
+**B. ComfyUI-Manager**
+
+Manager → *Install Custom Nodes* → **Install via Git URL** → isi:
+
+```
+https://github.com/CraftBlack/ComfyUI-Grokified-API
+```
+
+**C. Manual (dari folder ini atau dari ZIP rilis)**
+
+```powershell
 Copy-Item . 'C:\ComfyUI\custom_nodes\ComfyUI-Grokified-API' -Recurse -Force
 # lalu restart ComfyUI
 ```
 
-Tidak ada dependensi baru: `requests` sudah ada di venv ComfyUI.
+**D. Linux / Colab**
+
+```bash
+COMFY="/content/ComfyUI"        # sesuaikan dengan lokasi ComfyUI-mu
+mkdir -p "$COMFY/custom_nodes"
+git clone https://github.com/CraftBlack/ComfyUI-Grokified-API.git \
+          "$COMFY/custom_nodes/ComfyUI-Grokified-API"
+```
+
+Tidak ada dependensi baru: `requests` sudah ada di venv ComfyUI (dan di Colab).
 
 ## API key
 

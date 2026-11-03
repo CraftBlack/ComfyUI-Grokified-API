@@ -5,7 +5,11 @@ description = "Grokified (OpenAI-compatible) cloud LLM text/vision node for Comf
 requires-python = ">=3.9"
 dependencies = ["requests>=2.28"]
 
+[project.urls]
+Homepage = "https://github.com/CraftBlack/ComfyUI-Grokified-API"
+Issues = "https://github.com/CraftBlack/ComfyUI-Grokified-API/issues"
+
 [tool.comfy]
-PublisherId = "local"
+PublisherId = "CraftBlack"
 DisplayName = "ComfyUI Grokified API"
 Icon = ""
